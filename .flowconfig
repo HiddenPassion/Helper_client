@@ -19,18 +19,21 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+.*/node_modules/.staging/@babel/.*
+
 [include]
+
+[untyped]
+.*/node_modules/react-native-linear-gradient/*
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
 node_modules/react-native/flow/
 node_modules/react-native/flow-github/
+flow-typed/npm/
 
 [options]
 emoji=true
-
-esproposal.optional_chaining=enable
-esproposal.nullish_coalescing=enable
 
 module.system=haste
 module.system.haste.use_name_reducers=true
@@ -54,6 +57,9 @@ module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|we
 module.file_ext=.js
 module.file_ext=.jsx
 module.file_ext=.json
+module.file_ext=.ios.js
+module.file_ext=.android.js
+
 module.file_ext=.native.js
 
 suppress_type=$FlowIssue
@@ -67,4 +73,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-^0.89.0
+^0.75.0

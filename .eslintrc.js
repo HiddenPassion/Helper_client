@@ -46,6 +46,7 @@ module.exports = {
     "no-constant-condition": ["error", { checkLoops: false }],
     "no-console": "off",
     "no-restricted-syntax": "off",
+    "implicit-arrow-linebreak": 0,
     "react/no-unused-prop-types": "off",
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
