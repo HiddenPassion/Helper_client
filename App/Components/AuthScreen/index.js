@@ -45,6 +45,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
   },
+  linkButton: {
+    alignSelf: 'center',
+    marginTop: 10,
+    padding: 6,
+  },
   logo: {
     alignSelf: 'center',
     height: 150,
@@ -60,25 +65,36 @@ const styles = StyleSheet.create({
 });
 
 type AuthScreenType = {
-  onSubmit: Function,
   children: Node,
   submitLabel: string,
+  linkLabel: string,
+  onSubmit: Function,
+  onLinkPress: Function,
 };
 
-const AuthScreen = ({ children, onSubmit, submitLabel }: AuthScreenType) => (
+const AuthScreen = ({
+  children,
+  onSubmit,
+  submitLabel,
+  linkLabel,
+  onLinkPress,
+}: AuthScreenType) => (
   <KeyboardAvoidingView style={styles.keyboardAvoidingView}>
     <ScrollView contentContainerStyle={Styles.flexGrow}>
       <View style={styles.container}>
         <View style={styles.form}>
           <View style={styles.logo} />
-          <View style={styles.inputContainer}>
-            {children}
-          </View>
+          <View style={styles.inputContainer}>{children}</View>
           <ActiveOpacity onPress={onSubmit}>
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>{submitLabel}</Text>
               </View>
+            </View>
+          </ActiveOpacity>
+          <ActiveOpacity onPress={onLinkPress}>
+            <View style={styles.linkButton}>
+              <Text>{linkLabel}</Text>
             </View>
           </ActiveOpacity>
         </View>

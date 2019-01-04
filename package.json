@@ -16,6 +16,7 @@
     "react": "16.4.1",
     "react-native": "^0.55.4",
     "react-native-device-info": "^0.24.3",
+    "react-native-extra-dimensions-android": "^1.0.0",
     "react-native-image-picker": "^0.26.10",
     "react-native-navigation": "^1.1.486",
     "react-native-vector-icons": "^5.0.0",

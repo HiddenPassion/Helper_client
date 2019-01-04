@@ -6,12 +6,14 @@ import { Colors } from '../../Theme';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.springBug,
-    flex: 1,
+    backgroundColor: Colors.red,
+    height: 150,
+    width: 350,
+    alignSelf: 'center',
   },
 });
 
-const Subjects = ({}) => (
+const Subjects = () => (
   <View style={styles.container} />
 );
 

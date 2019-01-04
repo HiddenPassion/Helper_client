@@ -7,6 +7,7 @@ import { getPasswordErrorMessage, getEmailErrorMessage } from '../../Common/util
 import Input from '../../Components/Input';
 import withRefs from '../../Common/hocs/withRefs';
 import AuthScreen from '../../Components/AuthScreen';
+import { screen } from '../../Common/utils/navhelper';
 
 type LoginType = {
   email: {
@@ -21,6 +22,7 @@ type LoginType = {
   onEmailChange: Function,
   onPasswordBlur: Function,
   onPasswordChange: Function,
+  onLinkPress: Function,
   onLogin: Function,
   onEmailSubmit: Function,
   refs: Object,
@@ -35,11 +37,14 @@ const Login = ({
   onPasswordBlur,
   onLogin,
   onEmailSubmit,
+  onLinkPress,
   refs,
 }: LoginType) => (
   <AuthScreen
     onSubmit={onLogin}
     submitLabel="LOGIN"
+    linkLabel="Don't have an account? Tap to register"
+    onLinkPress={onLinkPress}
   >
     <Input
       value={emailValue}
@@ -60,7 +65,7 @@ const Login = ({
       inputRef={refs.save('passwordInput')}
       onSubmitEditing={onLogin}
       onBlur={onPasswordBlur}
-      keyboardType="email-address"
+      secureTextEntry
       underlineColorAndroid={passwordError ? Colors.red : Colors.white}
       onChangeText={onPasswordChange}
       errorMessage={passwordError}
@@ -123,6 +128,9 @@ const enhancer = compose(
         });
       }
     },
+    onLinkPress: ({ navigator }) => () => navigator.push(screen('helper.Registration', {
+      animationType: 'slide-horizontal',
+    })),
     onEmailSubmit: ({ refs }) => () => {
       refs.passwordInput.focus();
     },

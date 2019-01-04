@@ -9,6 +9,7 @@ export default {
   ...Platform.select({
     android: {
       navigationHeaderHeight: 49,
+      statusBarHeight: 0,
     },
   }),
 };

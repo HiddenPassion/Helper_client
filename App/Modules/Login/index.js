@@ -5,7 +5,7 @@ import { Navigation } from 'react-native-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './Login';
 import { selectToken, login } from './Module/duck';
-import { screen } from '../../Common/utils/navhelper';
+import { defaultNavigatorStyle } from '../../Common/utils/navhelper';
 import { GlobalNavigation } from '../../Navigation/GlobalNavigation';
 
 const mapStateToProps = state => ({
@@ -28,7 +28,7 @@ const moveToApp = ({ token, navigator }, hadToken) => {
               title: 'Subjects',
               icon: sources[0],
               navigatorStyle: {
-                navBarHidden: true,
+                ...defaultNavigatorStyle,
               },
             },
             {
@@ -36,7 +36,7 @@ const moveToApp = ({ token, navigator }, hadToken) => {
               title: 'Feedback',
               icon: sources[1],
               navigatorStyle: {
-                navBarHidden: true,
+                ...defaultNavigatorStyle,
               },
             },
           ],

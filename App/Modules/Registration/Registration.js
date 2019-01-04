@@ -26,6 +26,7 @@ type RegistrationType = {
   onUsernameChange: Function,
   onPasswordBlur: Function,
   onPasswordChange: Function,
+  onLinkPress: Function,
   refs: Object,
 };
 
@@ -42,9 +43,15 @@ const Registration = ({
   onUsernameChange,
   onPasswordBlur,
   onPasswordChange,
+  onLinkPress,
   refs,
 }: RegistrationType) => (
-  <AuthScreen onSubmit={onRegister} submitLabel="REGISTER">
+  <AuthScreen
+    onSubmit={onRegister}
+    submitLabel="REGISTER"
+    onLinkPress={onLinkPress}
+    linkLabel="Already have an account? Go to login"
+  >
     <Input
       value={emailValue}
       placeholder="email"
@@ -77,7 +84,7 @@ const Registration = ({
       inputRef={refs.save('passwordInput')}
       onSubmitEditing={onRegister}
       onBlur={onPasswordBlur}
-      keyboardType="email-address"
+      secureTextEntry
       underlineColorAndroid={passwordError ? Colors.red : Colors.transparent}
       onChangeText={onPasswordChange}
       errorMessage={passwordError}
