@@ -159,6 +159,8 @@ const enhancer = compose(
           // passProps: {}
         }),
       ),
+    onLinkPress: ({ navigator }) => () =>
+      navigator.push(screen('helper.Login', { animationType: 'slide-horizontal ' })),
   }),
   withHandlers({
     onRegister: ({

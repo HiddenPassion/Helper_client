@@ -21,10 +21,18 @@ const createApi = (getToken: () => string) /* : ApiType */ => {
 
   const login = data => api.post(urls.login, data);
   const registration = data => api.post(urls.registration, data);
+  const getUniversityList = () => api.get(urls.getUniversityList);
+  const editUniversity = ({ id, shortName, fullName }) =>
+    api.patch(urls.editUniversity(id), { shortName, fullName });
+  const createUniversity = ({ shortName, fullName }) =>
+    api.post(urls.createUniversity, { shortName, fullName });
 
   return {
     login,
     registration,
+    getUniversityList,
+    editUniversity,
+    createUniversity,
   };
 };
 

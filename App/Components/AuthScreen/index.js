@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import ActiveOpacity from '../ActiveOpacity';
 import { Styles, Colors } from '../../Theme';
+import Button from '../Button';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,20 +31,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 30,
-    alignSelf: 'center',
-    width: '80%',
-  },
-  button: {
-    width: '100%',
-    height: 46,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: Colors.red,
-    borderRadius: 10,
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: '600',
+    width: '80%',
   },
   linkButton: {
     alignSelf: 'center',
@@ -85,13 +74,11 @@ const AuthScreen = ({
         <View style={styles.form}>
           <View style={styles.logo} />
           <View style={styles.inputContainer}>{children}</View>
-          <ActiveOpacity onPress={onSubmit}>
-            <View style={styles.buttonContainer}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>{submitLabel}</Text>
-              </View>
-            </View>
-          </ActiveOpacity>
+          <Button
+            buttonStyle={styles.buttonContainer}
+            label={submitLabel}
+            onPress={onSubmit}
+          />
           <ActiveOpacity onPress={onLinkPress}>
             <View style={styles.linkButton}>
               <Text>{linkLabel}</Text>

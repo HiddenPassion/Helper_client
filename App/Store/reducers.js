@@ -6,6 +6,7 @@ import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import transform from './ImmutablePersistenceTransform';
 
 import login from '../Modules/Login/Module/duck';
+import university from '../Modules/University/Module/duck';
 
 const transforms: any = [transform];
 
@@ -20,6 +21,7 @@ const authPersistConfig = {
 
 const reducers = {
   login,
+  university,
 };
 
 const pReducer = persistReducer(

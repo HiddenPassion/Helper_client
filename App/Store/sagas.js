@@ -2,10 +2,11 @@
 import type { AnySaga } from '../Common/Sagas';
 import loginSagas from '../Modules/Login/Module/sagas';
 import registrationSagas from '../Modules/Registration/Modules/sagas';
-
+import universitySaga from '../Modules/University/Module/sagas';
 
 // need add api Type
 export default api => function* rootSaga(): AnySaga {
   yield* loginSagas(api).watchers();
   yield* registrationSagas(api).watchers();
+  yield* universitySaga(api).watchers();
 };

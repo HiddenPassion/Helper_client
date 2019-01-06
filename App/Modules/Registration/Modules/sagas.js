@@ -4,7 +4,7 @@ import { createWatchers } from '../../../Common/Sagas';
 import { REGISTER } from './duck';
 import type { AnySaga } from '../../../Common/Sagas';
 
-type RegistationPayloadType = {
+type RegistrationPayloadType = {
   email: string,
   password: string,
   username: string,
@@ -12,7 +12,7 @@ type RegistationPayloadType = {
 };
 
 export default (api /* : ApiType */) => {
-  function* registrationSaga({ payload }: RegistationPayloadType): AnySaga {
+  function* registrationSaga({ payload }: RegistrationPayloadType): AnySaga {
     try {
       const {
         email, username, password, onSuccess,
