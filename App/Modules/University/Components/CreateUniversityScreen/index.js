@@ -5,7 +5,7 @@ import { createUniversity } from '../../Module/duck';
 import CreateUniversityScreen from './CreateUniversityScreen';
 
 const mapDispatchToProps = {
-  dispatchEditUniversity: createUniversity,
+  dispatchCreateUniversity: createUniversity,
 };
 
 const enhancer = compose(

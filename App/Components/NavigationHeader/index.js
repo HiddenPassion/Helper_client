@@ -11,6 +11,9 @@ import TitleWrapper from './TitleWrapper';
 import { Metrics, Colors } from '../../Theme';
 import type { ViewStyle } from '../../Common/RNPropTypes';
 
+import AddButton from './AddButton';
+import BackButton from './BackButton';
+
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
@@ -125,4 +128,6 @@ export default compose(
 
 export {
   TitleWrapper,
+  AddButton,
+  BackButton,
 };

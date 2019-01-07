@@ -44,7 +44,6 @@ const EditUniversityScreen = ({
       underlineColorAndroid={Colors.transparent}
       onChangeText={onShortNameChange}
     />
-    <Input />
   </FormScreen>
 );
 
@@ -62,9 +61,9 @@ const enhancer = compose(
   ),
   withHandlers({
     onCreate: ({
-      fullName, shortName, dispatchEditUniversity, navigator,
+      fullName, shortName, dispatchCreateUniversity, navigator,
     }) => () =>
-      dispatchEditUniversity({
+      dispatchCreateUniversity({
         fullName,
         shortName,
         onSuccess: () => navigator.pop(),

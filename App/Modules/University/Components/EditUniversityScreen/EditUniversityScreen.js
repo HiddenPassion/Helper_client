@@ -45,7 +45,6 @@ const EditUniversityScreen = ({
       underlineColorAndroid={Colors.transparent}
       onChangeText={onShortNameChange}
     />
-    <Input />
   </FormScreen>
 );
 
