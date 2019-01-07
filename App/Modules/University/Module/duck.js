@@ -17,6 +17,7 @@ export const FILTER_UNIVERSITY_LIST_RESPONSE = universityDuck.defineType(
 export const FETCH_UNIVERSITY = universityDuck.defineType('FETCH_UNIVERSITY');
 export const FETCH_UNIVERSITY_RESPONSE = universityDuck.defineType('FETCH_UNIVERSITY_RESPONSE');
 export const SELECT_UNIVERSITY = universityDuck.defineType('SELECT_UNIVERSITY');
+export const SELECT_UNIVERSITY_RESPONSE = universityDuck.defineType('SELECT_UNIVERSITY_RESPONSE');
 export const CREATE_UNIVERSITY = universityDuck.defineType('CREATE_UNIVERSITY');
 export const CREATE_UNIVERSITY_RESPONSE = universityDuck.defineType('CREATE_UNIVERSITY_RESPONSE');
 export const DELETE_UNIVERSITY = universityDuck.defineType('DELETE_UNIVERSITY');
@@ -35,6 +36,7 @@ export const filterUniversityListResponse = universityDuck.createAction(
 );
 export const fetchUniversityResponse = universityDuck.createAction(FETCH_UNIVERSITY_RESPONSE);
 export const selectUniversity = universityDuck.createAction(SELECT_UNIVERSITY);
+export const selectUniversityResponse = universityDuck.createAction(SELECT_UNIVERSITY_RESPONSE);
 export const createUniversity: ActionCreator<UniversityPayloadType> = universityDuck.createAction(
   CREATE_UNIVERSITY,
 );
@@ -48,6 +50,7 @@ export const editUniversityResponse = universityDuck.createAction(EDIT_UNIVERSIT
 
 type InitialStateType = {
   items: Array<Object>,
+  filteredItems: Array<Object>,
   selectedUniversity: Object,
 };
 
@@ -57,7 +60,7 @@ export const INITIAL_STATE: ImmutableType<InitialStateType> = Immutable.from({
   selectedUniversity: null,
 });
 
-const fetchUniversityListResponseHandler = (state, { payload: { items } }) =>
+const fetchUniversityListHandler = (state, { payload: { items } }) =>
   state.merge({
     items,
     filteredItems: items,
@@ -71,8 +74,8 @@ const filterUniversityListHandler = (state, { payload: { filteredItems } }) =>
 
 const reducer = universityDuck.createReducer(
   {
-    [FETCH_UNIVERSITY_LIST_RESPONSE]: fetchUniversityListResponseHandler,
-    [SELECT_UNIVERSITY]: selectUniversityHandler,
+    [FETCH_UNIVERSITY_LIST_RESPONSE]: fetchUniversityListHandler,
+    [SELECT_UNIVERSITY_RESPONSE]: selectUniversityHandler,
     [FILTER_UNIVERSITY_LIST_RESPONSE]: filterUniversityListHandler,
   },
   INITIAL_STATE,

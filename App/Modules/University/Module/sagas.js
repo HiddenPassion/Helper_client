@@ -8,9 +8,10 @@ import {
   selectUniversityItems,
   FILTER_UNIVERSITY_LIST,
   filterUniversityListResponse,
-  selectUniversity,
+  selectUniversityResponse,
   EDIT_UNIVERSITY,
   CREATE_UNIVERSITY,
+  SELECT_UNIVERSITY,
   // DELETE_UNIVERSITY,
 } from './duck';
 import type { AnySaga } from '../../../Common/Sagas';
@@ -73,7 +74,7 @@ export default (api /* : ApiType */) => {
         data: { universities },
       } = yield call(api.getUniversityList);
       yield put(fetchUniversityListResponse({ items: universities }));
-      yield put(selectUniversity({ university }));
+      yield put(selectUniversityResponse({ university }));
       if (onSuccess) {
         onSuccess(university);
       }
@@ -97,11 +98,24 @@ export default (api /* : ApiType */) => {
     }
   }
 
+  function* selectUniversitySaga({ payload: { university, onSuccess } }) {
+    try {
+      yield put(selectUniversityResponse({ university }));
+
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   function* watchers(): AnySaga {
     yield createWatchers(FETCH_UNIVERSITY_LIST, fetchUniversityListSaga);
     yield createWatchers(EDIT_UNIVERSITY, editUniversity);
     yield createWatchers(CREATE_UNIVERSITY, createUniversity);
     yield createWatchers(FILTER_UNIVERSITY_LIST, filterUniversity);
+    yield createWatchers(SELECT_UNIVERSITY, selectUniversitySaga);
   }
 
   return {

@@ -1,22 +1,33 @@
 // @flow
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { compose } from 'recompose';
-import { Colors } from '../../Theme';
+import { connect } from 'react-redux';
+import {
+  fetchSubjectList,
+  selectFilteredSubjectList,
+  filterSubjectList,
+} from './Module/duck';
+import {
+  selectSelectedUniversity,
+  selectHasSelectedUniversity,
+} from '../University/Module/duck';
+import Subject from './Subject';
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.red,
-    height: 150,
-    width: 350,
-    alignSelf: 'center',
-  },
+const mapStateToProps = state => ({
+  subjects: selectFilteredSubjectList(state),
+  hasSelectedUniversity: selectHasSelectedUniversity(state),
+  selectedUniversity: selectSelectedUniversity(state),
 });
 
-const Subjects = () => (
-  <View style={styles.container} />
+const mapDispatchToProps = {
+  dispatchFetchSubjectList: fetchSubjectList,
+  dispatchFilterSubjectList: filterSubjectList,
+};
+
+const enhancer = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 );
 
-const enhancer = compose();
-
-export default enhancer(Subjects);
+export default enhancer(Subject);

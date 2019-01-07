@@ -6,7 +6,7 @@ import {
 import { compose, lifecycle, withHandlers } from 'recompose';
 import AppScreen from '../../Components/AppScreen';
 import ActiveOpacity from '../../Components/ActiveOpacity';
-import { screen, startTabBaseApp } from '../../Common/utils/navhelper';
+import { screen } from '../../Common/utils/navhelper';
 import { Colors } from '../../Theme';
 import type { TextStyle } from '../../Common/RNPropTypes';
 import Divider from '../../Components/Divider';
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
-  universityInfo: {
+  subjectInfo: {
     paddingHorizontal: 20,
     justifyContent: 'center',
     minHeight: 40,
@@ -74,54 +74,43 @@ const ItemButton = ({ label, onPress, textStyle }: ItemButtonType) => (
   </ActiveOpacity>
 );
 
-type UniversityType = {
-  universities: Object,
+type SubjectType = {
+  subjects: Object,
   onItemPress: Function,
   onEditPress: Function,
   onCreatePress: Function,
-  dispatchFetchUniversityList: Function, // need replace
-  dispatchFilterUniversityList: Function, // ?
+  fetchSubjectList: Function,
+  dispatchFilterSubjectList: Function, // ?
 };
 
-const University = ({
-  universities,
+const Subject = ({
+  subjects,
   onItemPress,
   onEditPress,
   onCreatePress,
-  dispatchFetchUniversityList,
-  dispatchFilterUniversityList,
-}: UniversityType) => (
-  <AppScreen
-    title="Select University"
-    renderRightButton={() => <AddButton onPress={onCreatePress} />}
-  >
+  fetchSubjectList,
+  dispatchFilterSubjectList,
+}: SubjectType) => (
+  <AppScreen title="Select subject" renderRightButton={() => <AddButton onPress={onCreatePress} />}>
     <SearchField
-      placeholder="Input university name"
+      placeholder="Input subject name"
       containerStyle={styles.searchFieldContainer}
-      filteringHandler={dispatchFilterUniversityList}
+      filteringHandler={dispatchFilterSubjectList}
     />
     <FlatList
       keyExtractor={keyExtractor}
       refreshing={false}
-      onRefresh={dispatchFetchUniversityList}
+      onRefresh={fetchSubjectList}
       style={styles.container}
       contentContainerStyle={styles.contentContainerStyle}
-      data={universities}
+      data={subjects}
       ItemSeparatorComponent={Divider}
-      // ListHeaderComponent={() => (
-      //   <SearchField
-      //     placeholder="Input university name"
-      //     containerStyle={styles.searchFieldContainer}
-      //     filteringHandler={dispatchFilterUniversityList}
-      //   />
-      // )}
-      // ListFooterComponent
-      renderItem={({ item: university }) => (
+      renderItem={({ item: subject }) => (
         <View style={styles.itemContainer}>
-          <ActiveOpacity onPress={() => onItemPress(university)}>
-            <View style={styles.universityInfo}>
+          <ActiveOpacity onPress={() => onItemPress(subject)}>
+            <View style={styles.subjectInfo}>
               <Text style={styles.itemText}>
-                {`${university.fullName}(${university.shortName})`}
+                {`${subject.fullName}(${subject.shortName})`}
               </Text>
             </View>
           </ActiveOpacity>
@@ -129,11 +118,11 @@ const University = ({
             <ItemButton
               label="EDIT"
               textStyle={styles.editTextButton}
-              onPress={() => onEditPress(university)}
+              onPress={() => onEditPress(subject)}
             />
             <ItemButton
               label="DELETE"
-              onPress={() => console.log(university)}
+              onPress={() => console.log(subject)}
               textStyle={styles.deleteTextButton}
             />
           </View>
@@ -145,31 +134,29 @@ const University = ({
 
 const enhancer = compose(
   withHandlers({
-    onItemPress: ({ dispatchSelectUniversity }) => university =>
-      dispatchSelectUniversity({
-        university,
-        onSuccess: startTabBaseApp,
-      }),
-    onEditPress: ({ navigator }) => university =>
+    onItemPress: ({ navigator }) => subject => console.log(subject, navigator),
+    onEditPress: ({ navigator }) => subject =>
       navigator.push(
-        screen('helper.EditUniversity', {
+        screen('helper.EditSubject', {
           animationType: 'slide-horizontal',
-          passProps: { university },
+          passProps: { subject },
         }),
       ),
     onCreatePress: ({ navigator }) => () =>
       navigator.push(
-        screen('helper.CreateUniversity', {
+        screen('helper.CreateSubject', {
           animationType: 'slide-horizontal',
         }),
       ),
+    fetchSubjectList: ({ dispatchFetchSubjectList, selectedUniversity }) => () =>
+      dispatchFetchSubjectList({ universityId: selectedUniversity.id }),
   }),
   lifecycle({
     componentDidMount() {
-      const { dispatchFetchUniversityList } = this.props;
-      dispatchFetchUniversityList();
+      const { fetchSubjectList } = this.props;
+      fetchSubjectList();
     },
   }),
 );
 
-export default enhancer(University);
+export default enhancer(Subject);

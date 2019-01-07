@@ -7,4 +7,7 @@ export default Object.freeze({
   getUniversityList: 'universities',
   editUniversity: id => `universities/${id}`,
   createUniversity: 'universities',
+  getSubjectList: id => `universities/subjects/${id}`,
+  editSubject: id => `subjects/${id}`,
+  createSubject: id => `universities/subject/${id}`,
 });

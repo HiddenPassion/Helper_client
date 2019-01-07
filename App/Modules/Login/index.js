@@ -1,11 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import { Navigation } from 'react-native-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './Login';
 import { selectToken, login } from './Module/duck';
-import { defaultNavigatorStyle, screen } from '../../Common/utils/navhelper';
+import { screen } from '../../Common/utils/navhelper';
 import { GlobalNavigation } from '../../Navigation/GlobalNavigation';
 
 const mapStateToProps = state => ({
@@ -19,30 +17,6 @@ const mapDispatchToProps = {
 const moveToApp = ({ token, navigator }, hadToken) => {
   if (token && !hadToken) {
     navigator.resetTo(screen('helper.University', { navigatorStyle: { disableBackGesture: true } }));
-    // Promise.all([Icon.getImageSource('md-map', 30), Icon.getImageSource('md-share-alt', 30)]).then(
-    //   (sources) => {
-    //     Navigation.startTabBasedApp({
-    //       tabs: [
-    //         {
-    //           screen: 'helper.Subjects',
-    //           title: 'Subjects',
-    //           icon: sources[0],
-    //           navigatorStyle: {
-    //             ...defaultNavigatorStyle,
-    //           },
-    //         },
-    //         {
-    //           screen: 'helper.Feedbacks',
-    //           title: 'Feedback',
-    //           icon: sources[1],
-    //           navigatorStyle: {
-    //             ...defaultNavigatorStyle,
-    //           },
-    //         },
-    //       ],
-    //     });
-    //   },
-    // );
   }
 };
 
