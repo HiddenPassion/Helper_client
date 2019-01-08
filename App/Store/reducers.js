@@ -8,6 +8,7 @@ import transform from './ImmutablePersistenceTransform';
 import login from '../Modules/Login/Module/duck';
 import university from '../Modules/University/Module/duck';
 import subject from '../Modules/Subjects/Module/duck';
+import lecturer from '../Modules/Lecturer/Module/duck';
 
 const transforms: any = [transform];
 
@@ -24,6 +25,7 @@ const reducers = {
   login,
   university,
   subject,
+  lecturer,
 };
 
 const pReducer = persistReducer(

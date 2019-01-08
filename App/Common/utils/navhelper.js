@@ -24,7 +24,7 @@ export const screen = (name: string, options: Object = {}) => {
 };
 
 export const startTabBaseApp = () => {
-  Promise.all([Icon.getImageSource('md-map', 30), Icon.getImageSource('md-share-alt', 30)]).then(
+  Promise.all([Icon.getImageSource('md-clipboard', 30), Icon.getImageSource('ios-people', 30)]).then(
     (sources) => {
       Navigation.startTabBasedApp({
         tabs: [
@@ -37,8 +37,8 @@ export const startTabBaseApp = () => {
             },
           },
           {
-            screen: 'helper.Feedbacks',
-            title: 'Feedback',
+            screen: 'helper.Lecturer',
+            title: 'Lecturers',
             icon: sources[1],
             navigatorStyle: {
               ...defaultNavigatorStyle,

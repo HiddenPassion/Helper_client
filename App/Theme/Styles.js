@@ -3,6 +3,10 @@ export default Object.freeze({
   flex: {
     flex: 1,
   },
+  flexDirection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   flexGrow: {
     flexGrow: 1,
   },

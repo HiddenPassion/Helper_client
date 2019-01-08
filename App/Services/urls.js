@@ -11,4 +11,7 @@ export default Object.freeze({
   getSubjectList: id => `universities/subjects/${id}`,
   editSubject: id => `subjects/${id}`,
   createSubject: id => `universities/subject/${id}`,
+  getLecturerList: id => `universities/lecturers/${id}`,
+  createLecturer: id => `universities/lecturer/${id}`,
+  editLecturer: id => `lecturer/${id}`,
 });

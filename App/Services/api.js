@@ -26,14 +26,33 @@ const createApi = (getToken: () => string) /* : ApiType */ => {
     api.patch(urls.editUniversity(id), { shortName, fullName });
   const createUniversity = ({ shortName, fullName }) =>
     api.post(urls.createUniversity, { shortName, fullName });
-  const deleteUniversity = ({ universityId }) =>
-    api.delete(urls.deleteUniversity(universityId));
-  const getSubjectList = ({ universityId }) =>
-    api.get(urls.getSubjectList(universityId));
+  const deleteUniversity = ({ universityId }) => api.delete(urls.deleteUniversity(universityId));
+  const getSubjectList = ({ universityId }) => api.get(urls.getSubjectList(universityId));
   const editSubject = ({ id, fullName, shortName }) =>
     api.patch(urls.editSubject(id), { fullName, shortName });
   const createSubject = ({ universityId, fullName, shortName }) =>
     api.post(urls.createSubject(universityId), { fullName, shortName });
+  const getLecturerList = ({ universityId }) => api.get(urls.getLecturerList(universityId));
+  const createLecturer = ({
+    universityId, name, surname, patronymic, description, imageUrl,
+  }) =>
+    api.post(urls.createLecturer(universityId), {
+      name,
+      surname,
+      patronymic,
+      description,
+      imageUrl,
+    });
+  const editLecturer = ({
+    lecturerId, name, surname, patronymic, description, imageUrl,
+  }) =>
+    api.patch(urls.editLecturer(lecturerId), {
+      name,
+      surname,
+      patronymic,
+      description,
+      imageUrl,
+    });
 
   return {
     login,
@@ -45,6 +64,9 @@ const createApi = (getToken: () => string) /* : ApiType */ => {
     getSubjectList,
     editSubject,
     createSubject,
+    getLecturerList,
+    createLecturer,
+    editLecturer,
   };
 };
 
