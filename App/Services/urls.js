@@ -14,4 +14,6 @@ export default Object.freeze({
   getLecturerList: id => `universities/lecturers/${id}`,
   createLecturer: id => `universities/lecturer/${id}`,
   editLecturer: id => `lecturer/${id}`,
+  getFeedbackList: id => `lecturer/feedbacks/${id}`,
+  createFeedback: id => `lecturer/feedback/${id}`,
 });

@@ -151,7 +151,18 @@ const Lecturer = ({
 
 const enhancer = compose(
   withHandlers({
-    onItemPress: ({ navigator }) => lecturer => console.log(lecturer, navigator),
+    onItemPress: ({ navigator }) => lecturer =>
+      navigator.push(
+        screen('helper.Feedback', {
+          animationType: 'slide-horizontal',
+          navigatorStyle: {
+            tabBarHidden: true,
+          },
+          passProps: {
+            lecturer,
+          },
+        }),
+      ),
     onEditPress: ({ navigator }) => lecturer =>
       navigator.push(
         screen('helper.EditLecturer', {

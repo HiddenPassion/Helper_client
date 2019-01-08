@@ -53,6 +53,10 @@ const createApi = (getToken: () => string) /* : ApiType */ => {
       description,
       imageUrl,
     });
+  const getFeedbackList = ({ lecturerId }) =>
+    api.get(urls.getFeedbackList(lecturerId));
+  const createFeedback = ({ lecturerId, userId, description }) =>
+    api.post(urls.createFeedback(lecturerId), { userId, description });
 
   return {
     login,
@@ -67,6 +71,8 @@ const createApi = (getToken: () => string) /* : ApiType */ => {
     getLecturerList,
     createLecturer,
     editLecturer,
+    getFeedbackList,
+    createFeedback,
   };
 };
 

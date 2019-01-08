@@ -5,6 +5,7 @@ import registrationSagas from '../Modules/Registration/Modules/sagas';
 import universitySaga from '../Modules/University/Module/sagas';
 import subjectSaga from '../Modules/Subjects/Module/sagas';
 import lecturerSaga from '../Modules/Lecturer/Module/sagas';
+import feedbackSaga from '../Modules/Feedbacks/Module/sagas';
 
 // need add api Type
 export default api => function* rootSaga(): AnySaga {
@@ -13,4 +14,5 @@ export default api => function* rootSaga(): AnySaga {
   yield* universitySaga(api).watchers();
   yield* subjectSaga(api).watchers();
   yield* lecturerSaga(api).watchers();
+  yield* feedbackSaga(api).watchers();
 };

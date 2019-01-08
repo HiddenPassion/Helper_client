@@ -4,6 +4,7 @@ import {
   View, Text, TextInput, StyleSheet,
 } from 'react-native';
 import { Colors } from '../../Theme';
+import type { ViewStyle } from '../../Common/RNPropTypes';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,17 +36,18 @@ const styles = StyleSheet.create({
 });
 
 // eslint-disable-next-line
-type Props = {
+type InputType = {
   errorMessage: string,
   inputRef: Object,
   placeholder: string,
   props: Object,
+  containerStyle?: ViewStyle
 };
 
 const Input = ({
-  errorMessage, inputRef, placeholder, ...props
-}: Props) => (
-  <View style={styles.container}>
+  errorMessage, containerStyle, inputRef, placeholder, ...props
+}: InputType) => (
+  <View style={[styles.container, containerStyle]}>
     <View style={styles.inputFieldContainer}>
       <TextInput
         {...props}

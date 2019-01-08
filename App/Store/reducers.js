@@ -9,6 +9,7 @@ import login from '../Modules/Login/Module/duck';
 import university from '../Modules/University/Module/duck';
 import subject from '../Modules/Subjects/Module/duck';
 import lecturer from '../Modules/Lecturer/Module/duck';
+import feedback from '../Modules/Feedbacks/Module/duck';
 
 const transforms: any = [transform];
 
@@ -26,6 +27,7 @@ const reducers = {
   university,
   subject,
   lecturer,
+  feedback,
 };
 
 const pReducer = persistReducer(

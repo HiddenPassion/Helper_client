@@ -39,18 +39,18 @@ const reducer = duck.createReducer(
   INITIAL_STATE,
 );
 
-export const selectLogin = state => state.login;
+export const selectLoginState = state => state.login;
 
-export const selectEmail: SelectorCreator = createSelector(selectLogin, ({ email }) => email);
-export const selectToken: SelectorCreator = createSelector(selectLogin, ({ token }) => token);
+export const selectEmail: SelectorCreator = createSelector(selectLoginState, ({ email }) => email);
+export const selectToken: SelectorCreator = createSelector(selectLoginState, ({ token }) => token);
 export const selectUsername: SelectorCreator = createSelector(
-  selectLogin,
+  selectLoginState,
   ({ username }) => username,
 );
 export const selectHasAdminEntitlement: SelectorCreator = createSelector(
-  selectLogin,
+  selectLoginState,
   ({ isAdmin }) => isAdmin,
 );
-export const getUserId: SelectorCreator = createSelector(selectLogin, ({ id }) => id);
+export const getUserId: SelectorCreator = createSelector(selectLoginState, ({ id }) => id);
 
 export default reducer;
