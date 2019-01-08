@@ -1,7 +1,7 @@
 // @flow
 import React, { type Node } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { compose } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import AppScreen from '../AppScreen';
 import Button from '../Button';
 import { BackButton } from '../NavigationHeader';
@@ -48,6 +48,10 @@ const FormScreen = ({
   </AppScreen>
 );
 
-const enhancer = compose();
+const enhancer = compose(
+  withHandlers({
+    onBack: ({ navigator }) => () => navigator.pop(),
+  }),
+);
 
 export default enhancer(FormScreen);

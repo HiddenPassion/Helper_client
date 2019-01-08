@@ -26,6 +26,8 @@ const createApi = (getToken: () => string) /* : ApiType */ => {
     api.patch(urls.editUniversity(id), { shortName, fullName });
   const createUniversity = ({ shortName, fullName }) =>
     api.post(urls.createUniversity, { shortName, fullName });
+  const deleteUniversity = ({ universityId }) =>
+    api.delete(urls.deleteUniversity(universityId));
   const getSubjectList = ({ universityId }) =>
     api.get(urls.getSubjectList(universityId));
   const editSubject = ({ id, fullName, shortName }) =>
@@ -39,6 +41,7 @@ const createApi = (getToken: () => string) /* : ApiType */ => {
     getUniversityList,
     editUniversity,
     createUniversity,
+    deleteUniversity,
     getSubjectList,
     editSubject,
     createSubject,

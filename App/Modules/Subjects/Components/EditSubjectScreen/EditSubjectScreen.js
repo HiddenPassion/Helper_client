@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-// import { StyleSheet } from 'react-native';
 import { compose, withStateHandlers, withHandlers } from 'recompose';
 import FormScreen from '../../../../Components/FormScreen';
 import Input from '../../../../Components/Input';
@@ -8,7 +7,7 @@ import { withRefs } from '../../../../Common/hocs';
 import type { NavigatorPropsType } from '../../../../Common/RNPropTypes';
 import { Colors } from '../../../../Theme';
 
-type EditUniversityScreenType = {
+type EditSubjectScreenType = {
   onSave: Function,
   fullName: string,
   shortName: string,
@@ -19,7 +18,7 @@ type EditUniversityScreenType = {
   navigator: NavigatorPropsType,
 };
 
-const EditUniversityScreen = ({
+const EditSubjectScreen = ({
   onSave,
   fullName,
   shortName,
@@ -28,9 +27,9 @@ const EditUniversityScreen = ({
   onFullNameChange,
   onFullNameSubmit,
   onShortNameChange,
-}: EditUniversityScreenType) => (
+}: EditSubjectScreenType) => (
   <FormScreen
-    title="Editing university"
+    title="Editing subject"
     footerButtonLabel="Save"
     onConfirmPress={onSave}
     navigator={navigator}
@@ -59,9 +58,9 @@ const EditUniversityScreen = ({
 const enhancer = compose(
   withRefs(),
   withStateHandlers(
-    ({ university }) => ({
-      fullName: university.fullName,
-      shortName: university.shortName,
+    ({ subject }) => ({
+      fullName: subject.fullName,
+      shortName: subject.shortName,
     }),
     {
       onFullNameChange: () => fullName => ({ fullName }),
@@ -70,10 +69,10 @@ const enhancer = compose(
   ),
   withHandlers({
     onSave: ({
-      fullName, shortName, dispatchEditUniversity, navigator, university,
+      fullName, shortName, dispatchEditSubject, navigator, subject,
     }) => () =>
-      dispatchEditUniversity({
-        id: university.id,
+      dispatchEditSubject({
+        id: subject.id,
         fullName,
         shortName,
         onSuccess: () => navigator.pop(),
@@ -84,4 +83,4 @@ const enhancer = compose(
   }),
 );
 
-export default enhancer(EditUniversityScreen);
+export default enhancer(EditSubjectScreen);

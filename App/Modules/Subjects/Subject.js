@@ -139,13 +139,22 @@ const enhancer = compose(
       navigator.push(
         screen('helper.EditSubject', {
           animationType: 'slide-horizontal',
+          navigatorStyle: {
+            tabBarHidden: true,
+          },
           passProps: { subject },
         }),
       ),
-    onCreatePress: ({ navigator }) => () =>
+    onCreatePress: ({ navigator, selectedUniversity }) => () =>
       navigator.push(
         screen('helper.CreateSubject', {
           animationType: 'slide-horizontal',
+          navigatorStyle: {
+            tabBarHidden: true,
+          },
+          passProps: {
+            universityId: selectedUniversity.id,
+          },
         }),
       ),
     fetchSubjectList: ({ dispatchFetchSubjectList, selectedUniversity }) => () =>

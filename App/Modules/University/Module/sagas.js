@@ -12,7 +12,7 @@ import {
   EDIT_UNIVERSITY,
   CREATE_UNIVERSITY,
   SELECT_UNIVERSITY,
-  // DELETE_UNIVERSITY,
+  DELETE_UNIVERSITY,
 } from './duck';
 import type { AnySaga } from '../../../Common/Sagas';
 
@@ -110,12 +110,26 @@ export default (api /* : ApiType */) => {
     }
   }
 
+  function* deleteUniversity({ payload: { universityId } }) {
+    try {
+      yield call(api.deleteUniversity, { universityId });
+      let universities = yield select(selectUniversityItems);
+      universities = [...universities];
+      const index = findIndex(universities, { id: universityId });
+      universities.splice(index, 1);
+      yield put(fetchUniversityListResponse({ items: universities }));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   function* watchers(): AnySaga {
     yield createWatchers(FETCH_UNIVERSITY_LIST, fetchUniversityListSaga);
     yield createWatchers(EDIT_UNIVERSITY, editUniversity);
     yield createWatchers(CREATE_UNIVERSITY, createUniversity);
     yield createWatchers(FILTER_UNIVERSITY_LIST, filterUniversity);
     yield createWatchers(SELECT_UNIVERSITY, selectUniversitySaga);
+    yield createWatchers(DELETE_UNIVERSITY, deleteUniversity);
   }
 
   return {

@@ -6,6 +6,7 @@ import {
   selectSelectedUniversity,
   selectHasSelectedUniversity,
   selectFilteredUniversityList,
+  deleteUniversity,
   selectUniversity,
   filterUniversityList,
 } from './Module/duck';
@@ -21,6 +22,7 @@ const mapDispatchToProps = {
   dispatchFetchUniversityList: fetchUniversityList,
   dispatchFilterUniversityList: filterUniversityList,
   dispatchSelectUniversity: selectUniversity,
+  dispatchDeleteUniversity: deleteUniversity,
 };
 
 const enhancer = compose(

@@ -4,6 +4,7 @@ import { compose, withStateHandlers, withHandlers } from 'recompose';
 import FormScreen from '../../../../Components/FormScreen';
 import Input from '../../../../Components/Input';
 import { withRefs } from '../../../../Common/hocs';
+import type { NavigatorPropsType } from '../../../../Common/RNPropTypes';
 import { Colors } from '../../../../Theme';
 
 type CreateUniversityScreenType = {
@@ -14,6 +15,7 @@ type CreateUniversityScreenType = {
   onFullNameSubmit: Function,
   onShortNameChange: Function,
   refs: Object,
+  navigator: NavigatorPropsType,
 };
 
 const EditUniversityScreen = ({
@@ -21,11 +23,17 @@ const EditUniversityScreen = ({
   fullName,
   shortName,
   refs,
+  navigator,
   onFullNameChange,
   onFullNameSubmit,
   onShortNameChange,
 }: CreateUniversityScreenType) => (
-  <FormScreen title="Creating university" footerButtonLabel="Create" onConfirmPress={onCreate}>
+  <FormScreen
+    title="Creating university"
+    footerButtonLabel="Create"
+    onConfirmPress={onCreate}
+    navigator={navigator}
+  >
     <Input
       value={fullName}
       placeholder="Full Name"

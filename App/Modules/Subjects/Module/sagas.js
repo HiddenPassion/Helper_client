@@ -72,7 +72,7 @@ export default (api /* : ApiType */) => {
       // yield put(selectSubject, { subject });
       const {
         data: { subjects },
-      } = yield call(api.getSubjectList);
+      } = yield call(api.getSubjectList, { universityId });
       yield put(fetchSubjectListResponse({ items: subjects }));
       // yield put(selectSubject({ subject }));
       if (onSuccess) {

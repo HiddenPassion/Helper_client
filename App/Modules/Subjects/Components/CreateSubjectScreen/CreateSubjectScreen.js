@@ -1,15 +1,14 @@
 // @flow
 import React from 'react';
-// import { StyleSheet } from 'react-native';
 import { compose, withStateHandlers, withHandlers } from 'recompose';
 import FormScreen from '../../../../Components/FormScreen';
 import Input from '../../../../Components/Input';
 import { withRefs } from '../../../../Common/hocs';
-import type { NavigatorPropsType } from '../../../../Common/RNPropTypes';
 import { Colors } from '../../../../Theme';
+import type { NavigatorPropsType } from '../../../../Common/RNPropTypes';
 
-type EditUniversityScreenType = {
-  onSave: Function,
+type CreateUniversityScreenType = {
+  onCreate: Function,
   fullName: string,
   shortName: string,
   onFullNameChange: Function,
@@ -20,19 +19,19 @@ type EditUniversityScreenType = {
 };
 
 const EditUniversityScreen = ({
-  onSave,
+  onCreate,
   fullName,
   shortName,
   refs,
-  navigator,
   onFullNameChange,
   onFullNameSubmit,
   onShortNameChange,
-}: EditUniversityScreenType) => (
+  navigator,
+}: CreateUniversityScreenType) => (
   <FormScreen
-    title="Editing university"
-    footerButtonLabel="Save"
-    onConfirmPress={onSave}
+    title="Creating subject"
+    footerButtonLabel="Create"
+    onConfirmPress={onCreate}
     navigator={navigator}
   >
     <Input
@@ -49,7 +48,7 @@ const EditUniversityScreen = ({
       placeholder="Short Name"
       returnKeyType="done"
       inputRef={refs.save('shortNameInput')}
-      onSubmitEditing={onSave}
+      onSubmitEditing={onCreate}
       underlineColorAndroid={Colors.transparent}
       onChangeText={onShortNameChange}
     />
@@ -59,23 +58,23 @@ const EditUniversityScreen = ({
 const enhancer = compose(
   withRefs(),
   withStateHandlers(
-    ({ university }) => ({
-      fullName: university.fullName,
-      shortName: university.shortName,
-    }),
+    {
+      fullName: null,
+      shortName: null,
+    },
     {
       onFullNameChange: () => fullName => ({ fullName }),
       onShortNameChange: () => shortName => ({ shortName }),
     },
   ),
   withHandlers({
-    onSave: ({
-      fullName, shortName, dispatchEditUniversity, navigator, university,
+    onCreate: ({
+      fullName, shortName, universityId, dispatchCreateSubject, navigator,
     }) => () =>
-      dispatchEditUniversity({
-        id: university.id,
+      dispatchCreateSubject({
         fullName,
         shortName,
+        universityId,
         onSuccess: () => navigator.pop(),
       }),
     onFullNameSubmit: ({ refs }) => () => {

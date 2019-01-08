@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import {
-  View, FlatList, Text, StyleSheet,
+  View, FlatList, Text, Alert, StyleSheet,
 } from 'react-native';
 import { compose, lifecycle, withHandlers } from 'recompose';
 import AppScreen from '../../Components/AppScreen';
@@ -79,6 +79,7 @@ type UniversityType = {
   onItemPress: Function,
   onEditPress: Function,
   onCreatePress: Function,
+  onDeletePress: Function,
   dispatchFetchUniversityList: Function, // need replace
   dispatchFilterUniversityList: Function, // ?
 };
@@ -88,6 +89,7 @@ const University = ({
   onItemPress,
   onEditPress,
   onCreatePress,
+  onDeletePress,
   dispatchFetchUniversityList,
   dispatchFilterUniversityList,
 }: UniversityType) => (
@@ -133,7 +135,7 @@ const University = ({
             />
             <ItemButton
               label="DELETE"
-              onPress={() => console.log(university)}
+              onPress={() => onDeletePress(university)}
               textStyle={styles.deleteTextButton}
             />
           </View>
@@ -163,6 +165,16 @@ const enhancer = compose(
           animationType: 'slide-horizontal',
         }),
       ),
+    onDeletePress: ({ dispatchDeleteUniversity }) => ({ id, fullName, shortName }) =>
+      Alert.alert(`You really want delete ${fullName}(${shortName})`, '', [
+        {
+          text: 'Yes',
+          onPress: () => dispatchDeleteUniversity({ universityId: id }),
+        },
+        {
+          text: 'No',
+        },
+      ]),
   }),
   lifecycle({
     componentDidMount() {
