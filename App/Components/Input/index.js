@@ -41,18 +41,19 @@ type InputType = {
   inputRef: Object,
   placeholder: string,
   props: Object,
-  containerStyle?: ViewStyle
+  containerStyle?: ViewStyle,
+  inputStyle?: ViewStyle,
 };
 
 const Input = ({
-  errorMessage, containerStyle, inputRef, placeholder, ...props
+  errorMessage, containerStyle, inputStyle, inputRef, placeholder, ...props
 }: InputType) => (
   <View style={[styles.container, containerStyle]}>
     <View style={styles.inputFieldContainer}>
       <TextInput
         {...props}
         placeholder={placeholder && placeholder[0].toUpperCase() + placeholder.slice(1)}
-        style={styles.inputField}
+        style={[styles.inputField, inputStyle]}
         ref={inputRef}
       />
     </View>

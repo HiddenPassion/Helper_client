@@ -8,10 +8,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AppScreen from '../../Components/AppScreen';
 // import ActiveOpacity from '../../Components/ActiveOpacity';
 import { screen } from '../../Common/utils/navhelper';
-import { Colors } from '../../Theme';
+import { Colors, Styles } from '../../Theme';
 // import type { TextStyle } from '../../Common/RNPropTypes';
 import Divider from '../../Components/Divider';
 import AddFeedback from './Components/AddFeedback';
+import { BackButton } from '../../Components/NavigationHeader';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,25 +25,30 @@ const styles = StyleSheet.create({
   userInfoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 2,
+
   },
   lecturerInfoContainer: {
-    height: 200,
-    width: '100%',
-    backgroundColor: Colors.palePrim,
+    paddingVertical: 15,
+    marginVertical: 15,
+    backgroundColor: Colors.white,
   },
   descriptionContainer: {
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 15,
     paddingVertical: 10,
+    marginBottom: 10,
   },
   userInfo: {
-    width: '100%',
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     marginLeft: 10,
     justifyContent: 'space-between',
+  },
+  redText: {
+    color: Colors.red,
   },
   // button: {
   //   alignItems: 'center',
@@ -66,7 +72,19 @@ const styles = StyleSheet.create({
   //   color: Colors.forestGreen,
   // },
   contentContainerStyle: {
+    paddingTop: 20,
+    paddingBottom: 30,
     backgroundColor: Colors.white,
+  },
+  lecturerIcon: {
+    alignSelf: 'center',
+  },
+  lecturerFullName: {
+    marginVertical: 10,
+    alignSelf: 'center',
+  },
+  lecturerDescription: {
+    marginHorizontal: 25,
   },
 });
 
@@ -92,6 +110,7 @@ type FeedbackType = {
   lecturer: Object,
   onEditPress: Function,
   fetchFeedbackList: Function,
+  onBack: Function,
   dispatchCreateFeedback: Function,
 };
 
@@ -101,12 +120,18 @@ const Feedback = ({
   fetchFeedbackList,
   user,
   lecturer,
+  onBack,
   dispatchCreateFeedback,
 }: FeedbackType) => (
   <AppScreen
     title="Feedbacks"
+    renderLeftButton={() => <BackButton onPress={onBack} />}
   >
-    <View style={styles.lecturerInfoContainer} />
+    <View style={styles.lecturerInfoContainer}>
+      <Icon name="md-happy" size={150} style={styles.lecturerIcon} />
+      <View style={styles.lecturerFullName}><Text>{lecturer.fullName}</Text></View>
+      <View style={styles.lecturerDescription}><Text>{lecturer.description}</Text></View>
+    </View>
     <FlatList
       keyExtractor={keyExtractor}
       refreshing={false}
@@ -127,7 +152,10 @@ const Feedback = ({
           <View style={styles.userInfoContainer}>
             <Icon name="ios-contact" size={30} />
             <View style={styles.userInfo}>
-              <Text>{user.username}</Text>
+              <View style={Styles.flexDirection}>
+                <Text>{user.username}</Text>
+                {feedback.User.id === user.id && (<Text style={styles.redText}>(You)</Text>)}
+              </View>
               <Text>{feedback.updatedAt}</Text>
             </View>
           </View>
@@ -154,6 +182,7 @@ const enhancer = compose(
       ),
     fetchFeedbackList: ({ dispatchFetchFeedbackList, lecturer }) => () =>
       dispatchFetchFeedbackList({ lecturerId: lecturer.id }),
+    onBack: ({ navigator }) => () => navigator.pop(),
   }),
   lifecycle({
     componentDidMount() {
